@@ -28,23 +28,27 @@ def intToChar(x):
        return chr(x+ord('A')-26)
 
 def Decryption(text,key):
+    k_length = len(key)
+    D_text = ""
     plainText = text.replace(" ", "")
-    keyLength = len(key)
-    decryptedText = ""
     for i, c in enumerate(plainText):
-        decryptedInt = charToInt(c) - charToInt(key[i%keyLength])
-        decryptedCharachter = intToChar(decryptedInt)
-        decryptedText+=decryptedCharachter
-    return decryptedText
+        tmp = charToInt(c) - charToInt(key[i%k_length])
+        #print(tmp)
+        D_int=tmp
+        decryptedCharachter = intToChar(D_int)
+        #print(decryptedCharachter)
+        D_text+=decryptedCharachter
+    return D_text
+
 
 
 def getFreq(text):
-    textLength = len(text)
+    text_len = len(text)
     frequency = []
     for i in range(26):
-        frequency.append(round(100*text.count(chr(i+ord("a")))/textLength,10))
+        frequency.append(round(100*text.count(chr(i+ord("a")))/text_len,10))
     for i in range(26):
-        frequency.append(round(100*text.count(chr(i+ord("A")))/textLength,10))
+        frequency.append(round(100*text.count(chr(i+ord("A")))/text_len,10))
     return frequency
 
 
@@ -66,17 +70,16 @@ def getAlphabetFrequency():
 def findpredictedKey(keyLength,text):
 
     freq = getAlphabetFrequency()
-    textLength = len(text)
+    text_len = len(text)
     nthCharArr = []
 
+    finalPredictedKey = ""
     for i in range(keyLength):
         tempCharArr = ""
-        for j in range(i,textLength,keyLength):
+        for j in range(i,text_len,keyLength):
             tempCharArr+=text[j]
         # print(tempCharArr)
         nthCharArr.append(tempCharArr)
-    
-    finalPredictedKey = ""
 
     for i in range(keyLength):
         cipherTextFreq = getFreq(nthCharArr[i])
@@ -85,9 +88,8 @@ def findpredictedKey(keyLength,text):
             for k in range(25):
                 if freq[k] > cipherTextFreq[(k+j)%52]+5 or freq[k] < cipherTextFreq[(k+j)%52]-5:
                     break
-                else:
-                    if k == 24:
-                        isCipherCharachterFound = True
+                elif k == 24:
+                    isCipherCharachterFound = True
             if isCipherCharachterFound == True:
                 if j<26:
                     finalPredictedKey+=chr(ord('a')+j)
