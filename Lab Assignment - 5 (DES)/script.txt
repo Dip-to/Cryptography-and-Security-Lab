@@ -1,0 +1,9 @@
+Part_1:
+
+Encryption: python3 DES_test.py message.txt key.txt encrypted.txt
+Decryption: python3 DES_test.py encrypted.txt key.txt decrypted.txt
+
+Part_2:
+
+Encryption: python3 DES_image.py image.ppm key.txt image_enc.ppm
+Decryption: python3 DES_image.py image_enc.ppm key.txt image_dec.ppm
