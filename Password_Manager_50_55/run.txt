@@ -1,0 +1,4 @@
+npm install
+npm install -g mocha
+npm install --save-dev mocha
+npx mocha test/test-password-manager.js 

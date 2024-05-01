@@ -63,10 +63,3 @@ while (bv.more_to_read): #(U)
     tempBv.write_to_file(FILEOUT)
 # close output file
 FILEOUT.close()
-    
-   
-    
-  
-
-
-

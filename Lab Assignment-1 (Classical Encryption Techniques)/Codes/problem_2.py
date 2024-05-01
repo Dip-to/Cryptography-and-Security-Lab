@@ -68,11 +68,9 @@ def getAlphabetFrequency():
 
 
 def findpredictedKey(keyLength,text):
-
     freq = getAlphabetFrequency()
     text_len = len(text)
     nthCharArr = []
-
     finalPredictedKey = ""
     for i in range(keyLength):
         tempCharArr = ""
@@ -98,7 +96,6 @@ def findpredictedKey(keyLength,text):
                 break
         if isCipherCharachterFound == False:
             finalPredictedKey+="X"
-
     return finalPredictedKey
 
 def kasiskiKeyLength(cipherText):
